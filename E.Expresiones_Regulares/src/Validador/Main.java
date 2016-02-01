@@ -1,15 +1,16 @@
 package Validador;
 
 import java.util.Random;
-import java.util.ArrayList;
 
 public class Main {
 
 	public static void main(String[] args) {
+		//Descomentar el caso test que se desee comprobar.
 		//testDNICorrectos();
 		//testDNIIncorrectos();
 		//testNIECorrectos();
-		testNIEIncorrectos();
+		//testNIEIncorrectos();
+		//testDniCif();
 	}
 	
 	public static void testDNICorrectos(){
@@ -131,6 +132,13 @@ public class Main {
 			}
 		}
 
+	}
+	
+	public static void testDniCif(){
+		DniCif dniValido 	= new DniCif("78484464T");
+		DniCif dniInvalido 	= new DniCif("784844Ñ");
+		System.out.println(dniValido.getPatronDniValido());
+		System.out.println(dniInvalido.getPatronDniValido());
 	}
 }
 
