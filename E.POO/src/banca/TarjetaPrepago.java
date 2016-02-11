@@ -66,7 +66,8 @@ void enviarMensaje(Integer mensajes){
 }
 
 void realizarLlamada(Integer segundos){
-	this.saldo -= 0.15 + (0.01 * segundos);	
+	this.saldo -= 0.15 + (0.01 * segundos);
+	this.contadoConsumo(segundos);
 }
 void consultarTarjeta(){
 	System.out.println("Num Tel: " + this.getTelefono());
@@ -74,4 +75,25 @@ void consultarTarjeta(){
 	System.out.println("Saldo Actual: " + this.getSaldo());
 }
 
+void contadoConsumo(Integer segundosLlamada){
+	Integer horas		= consumo.getHoras();
+	Integer minutos		= consumo.getMinutos();
+	Integer segundos	= consumo.getSegundos() + segundosLlamada;
+	
+	if (segundos >= 60){
+		minutos += segundos /60;
+		if (minutos >= 60){
+			horas += minutos /60;
+			if (horas < 0)
+				horas = 0;
+		}
+	}
+	if (minutos >= 60){
+		horas += minutos /60;
+		if (horas < 0)
+			horas = 0;
+	}
+	
+	this.consumo.setHora(horas, minutos, segundos);
+}
 }
