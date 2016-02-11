@@ -62,7 +62,7 @@ void ingresarSaldo(Double cantidad){
 }
 
 void enviarMensaje(Integer mensajes){
-	this.saldo -= + 0.9 * mensajes;
+	this.saldo -= + 0.09 * mensajes;
 }
 
 void realizarLlamada(Integer segundos){
