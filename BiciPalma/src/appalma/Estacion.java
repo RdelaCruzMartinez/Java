@@ -3,11 +3,7 @@ package appalma;
 import appalma.Bicicleta;
 import appalma.TarjetaUsuario;
 import java.util.Random;
-import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.Month;
-import static java.time.temporal.ChronoUnit.DAYS;
-import static java.time.temporal.ChronoUnit.HOURS;
 import static java.time.temporal.ChronoUnit.MINUTES;
 
 import java.time.temporal.ChronoUnit;
@@ -59,18 +55,15 @@ public class Estacion {
 	}
 	
 	Integer anclajesLibres(){
-		int contador = 0;
-		int posicion = 0;
-		for (Bicicleta anclaje: this.anclajes){
-			if (anclajes[posicion] == null){
-				contador += 1;
-				posicion += 1;
-			}
-			else {
-				posicion +=1;
+		
+		int anclajesLibres = 0;
+		
+		for (int i = 0; i < this.numeroAnclajes; i++){
+			if (anclajes[i] == null){
+				anclajesLibres++;
 			}
 		}
-		return contador;
+		return anclajesLibres;
 	}
 	
 	void anclarBicicleta(Bicicleta bici){
@@ -83,6 +76,21 @@ public class Estacion {
 		    posicion += 1;
 		}
 	    this.consultarAnclajes();
+	    this.medidorTiempo(bici);
+	}
+	
+	void medidorTiempo(Bicicleta bici){
+		LocalTime entrega = LocalTime.now();
+		//LocalTime entrega = LocalTime.of(19, 25); Test para comprobar el exceso de tiempo.
+		LocalTime retirada = bici.getTiempo();
+		int horaInicial = retirada.getHour();
+		int minutosInicial = retirada.getMinute();
+		if (horaInicial !=0 && minutosInicial != 0){
+			long duracion = MINUTES.between(retirada,entrega);
+			if (duracion > 30){
+				System.out.println("Se ha sobrepasado el tiempo permitido, se le aplicara un recargo");
+			}
+		}
 	}
 	
 	void consultarAnclajes(){
@@ -118,7 +126,10 @@ public class Estacion {
 		   }
 	}
 	this.mostrarBicicleta(bici,lugar);
-	//this.contador
+	LocalTime retirada = LocalTime.now();
+	int horas = retirada.getHour();
+	int minutos = retirada.getMinute();
+	bici.setTiempo(horas, minutos);
 	}
 	
 	void mostrarBicicleta(Bicicleta bici, int lugar){

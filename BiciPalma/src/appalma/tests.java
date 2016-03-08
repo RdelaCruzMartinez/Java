@@ -2,7 +2,7 @@ package appalma;
 
 import java.util.Random;
 
-public class tests {
+public class Tests {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -10,6 +10,7 @@ public class tests {
 		//testBici();
 		//testTarjetaUsuario();
 		//testRandom();
+		testTiempo();
 
 	}
 	public static void testEstacion(){
@@ -53,6 +54,22 @@ public class tests {
 		Random random = new Random();
 		Integer numero = random.nextInt(6);
 		System.out.println(numero);
+	}
+	
+	public static void testTiempo(){
+		Estacion estacion = new Estacion(1, "Manacor", 6);
+		TarjetaUsuario tarjeta = new TarjetaUsuario("52228");
+		tarjeta.setActivada(true);
+		Bicicleta b335 = new Bicicleta("335");
+		Bicicleta b336 = new Bicicleta("336");
+		Bicicleta bici3 = new Bicicleta("500");
+		//estacion.consultarEstacion();
+		//estacion.consultarAnclajes();
+		estacion.anclarBicicleta(b335);
+		estacion.anclarBicicleta(b336);
+		//estacion.consultarAnclajes();
+		estacion.retirarBicicleta(tarjeta);
+		estacion.anclarBicicleta(b335);
 	}
 	
 }
