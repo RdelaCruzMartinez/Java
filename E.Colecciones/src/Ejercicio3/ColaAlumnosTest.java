@@ -7,8 +7,8 @@ import org.junit.Test;
 
 public class ColaAlumnosTest {
 
-	private static ColaAlumnos cola;
-	private static  Alumno a;
+	private  ColaAlumnos cola;
+	private  Alumno a;
 	private  Alumno b;
 	private  Alumno c;
 	private  Alumno d;
